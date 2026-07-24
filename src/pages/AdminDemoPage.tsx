@@ -18,7 +18,8 @@ import { floorLabel } from '../data/apartments';
 import type { ApartmentStatus } from '../types';
 import { StatusBadge } from '../components/ui/StatusBadge';
 
-const statCard = 'flex flex-col gap-1 border border-charcoal-700/10 bg-white p-5 shadow-card';
+const statCard =
+  'relative flex flex-col gap-1 overflow-hidden border border-charcoal-700/10 bg-white p-5 shadow-card before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-bronze-400/70';
 
 const AdminDemoPage = () => {
   const apartments = useApartments();
@@ -108,27 +109,27 @@ const AdminDemoPage = () => {
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
           <div className={statCard}>
             <Building className="h-5 w-5 text-bronze-500" aria-hidden="true" />
-            <p className="font-display text-3xl font-semibold text-charcoal-800">{counts.total}</p>
+            <p className="font-display text-4xl font-semibold tabular-nums text-charcoal-800">{counts.total}</p>
             <p className="text-[0.68rem] uppercase tracking-[0.12em] text-charcoal-400">Lots au total</p>
           </div>
           <div className={statCard}>
             <BadgeCheck className="h-5 w-5 text-forest-600" aria-hidden="true" />
-            <p className="font-display text-3xl font-semibold text-forest-700">{counts.available}</p>
+            <p className="font-display text-4xl font-semibold tabular-nums text-forest-700">{counts.available}</p>
             <p className="text-[0.68rem] uppercase tracking-[0.12em] text-charcoal-400">Disponibles</p>
           </div>
           <div className={statCard}>
             <KeyRound className="h-5 w-5 text-bronze-500" aria-hidden="true" />
-            <p className="font-display text-3xl font-semibold text-bronze-600">{counts.reserved}</p>
+            <p className="font-display text-4xl font-semibold tabular-nums text-bronze-600">{counts.reserved}</p>
             <p className="text-[0.68rem] uppercase tracking-[0.12em] text-charcoal-400">Réservés</p>
           </div>
           <div className={statCard}>
             <KeyRound className="h-5 w-5 text-charcoal-400" aria-hidden="true" />
-            <p className="font-display text-3xl font-semibold text-charcoal-500">{counts.sold}</p>
+            <p className="font-display text-4xl font-semibold tabular-nums text-charcoal-500">{counts.sold}</p>
             <p className="text-[0.68rem] uppercase tracking-[0.12em] text-charcoal-400">Vendus</p>
           </div>
           <div className={`${statCard} col-span-2 md:col-span-1`}>
             <Users className="h-5 w-5 text-bronze-500" aria-hidden="true" />
-            <p className="font-display text-3xl font-semibold text-charcoal-800">
+            <p className="font-display text-4xl font-semibold tabular-nums text-charcoal-800">
               {mockLeads.length + bookings.length}
             </p>
             <p className="text-[0.68rem] uppercase tracking-[0.12em] text-charcoal-400">

@@ -12,11 +12,11 @@ const AnimatedNumber = ({ target, suffix = '' }: { target: number; suffix?: stri
 };
 
 export const Stats = () => (
-  <section className="bg-forest-800 py-16 text-ivory-50 md:py-20" aria-label="Chiffres clés du programme">
-    <div className="container-luxe">
+  <section className="relative grain overflow-hidden bg-forest-800 py-16 text-ivory-50 md:py-20" aria-label="Chiffres clés du programme">
+    <div className="container-luxe relative z-10">
       <dl className="grid grid-cols-2 gap-x-6 gap-y-10 text-center md:grid-cols-5">
         <Reveal className="flex flex-col">
-          <dd className="order-1 font-display text-4xl font-medium text-bronze-300 md:text-5xl">
+          <dd className="order-1 font-display text-4xl font-medium text-bronze-300 tabular-nums md:text-5xl">
             <AnimatedNumber target={40} />
           </dd>
           <dt className="order-2 mt-2 text-[0.68rem] uppercase tracking-luxe text-ivory-100/60">
@@ -24,7 +24,7 @@ export const Stats = () => (
           </dt>
         </Reveal>
         <Reveal delay={0.06} className="flex flex-col">
-          <dd className="order-1 font-display text-4xl font-medium text-bronze-300 md:text-5xl">
+          <dd className="order-1 font-display text-4xl font-medium text-bronze-300 tabular-nums md:text-5xl">
             <AnimatedNumber target={2} />
           </dd>
           <dt className="order-2 mt-2 text-[0.68rem] uppercase tracking-luxe text-ivory-100/60">
@@ -32,7 +32,7 @@ export const Stats = () => (
           </dt>
         </Reveal>
         <Reveal delay={0.12} className="flex flex-col">
-          <dd className="order-1 font-display text-4xl font-medium text-bronze-300 md:text-5xl">
+          <dd className="order-1 font-display text-4xl font-medium text-bronze-300 tabular-nums md:text-5xl">
             <AnimatedNumber target={5} />
           </dd>
           <dt className="order-2 mt-2 text-[0.68rem] uppercase tracking-luxe text-ivory-100/60">
@@ -40,7 +40,7 @@ export const Stats = () => (
           </dt>
         </Reveal>
         <Reveal delay={0.18} className="flex flex-col">
-          <dd className="order-1 font-display text-4xl font-medium text-bronze-300 md:text-5xl">
+          <dd className="order-1 font-display text-4xl font-medium text-bronze-300 tabular-nums md:text-5xl">
             <AnimatedNumber target={75} />
             <span className="text-2xl md:text-3xl"> à </span>
             <AnimatedNumber target={160} />
@@ -51,7 +51,7 @@ export const Stats = () => (
           </dt>
         </Reveal>
         <Reveal delay={0.24} className="col-span-2 flex flex-col md:col-span-1">
-          <dd className="order-1 font-display text-4xl font-medium text-bronze-300 md:text-5xl">
+          <dd className="order-1 font-display text-4xl font-medium text-bronze-300 tabular-nums md:text-5xl">
             T2 2028
           </dd>
           <dt className="order-2 mt-2 text-[0.68rem] uppercase tracking-luxe text-ivory-100/60">

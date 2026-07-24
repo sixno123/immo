@@ -108,7 +108,7 @@ export const BookingForm = () => {
           eyebrow="Réserver une visite"
           title={
             <>
-              Venez découvrir <span className="italic text-bronze-300">votre futur chez-vous</span>
+              Venez découvrir <span className="font-light italic text-bronze-300">votre futur chez-vous</span>
             </>
           }
           description="Notre équipe commerciale vous accueille au bureau de vente, sept jours sur sept. Choisissez le créneau qui vous convient."

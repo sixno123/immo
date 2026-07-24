@@ -61,7 +61,7 @@ export const Amenities = () => (
         eyebrow="Prestations"
         title={
           <>
-            Tout, pensé pour <span className="italic text-forest-700">votre quotidien</span>
+            Tout, pensé pour <span className="font-light italic text-forest-700">votre quotidien</span>
           </>
         }
         description="Des espaces communs dessinés comme ceux d'un hôtel de charme, entretenus et sécurisés toute l'année."

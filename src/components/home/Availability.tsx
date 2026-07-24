@@ -38,7 +38,7 @@ export const Availability = () => {
           eyebrow="Disponibilités"
           title={
             <>
-              Trouvez <span className="italic text-forest-700">votre appartement</span>
+              Trouvez <span className="font-light italic text-forest-700">votre appartement</span>
             </>
           }
           description="Affinez votre recherche par bâtiment, étage, budget et surface pour découvrir les lots qui vous correspondent."
