@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Suivi des prospects — Bureau de vente digital</title>
+  <style>
+    :root {
+      --ivory: #f7f4ec; --forest: #1f3d2b; --forest-soft: #365b44;
+      --charcoal: #1a1a1d; --bronze: #c2a566; --line: #e0dccf;
+      --a: #1f3d2b; --b: #9a7b3f; --c: #6b6b70;
+      --danger: #9b2c2c; --ok: #2f6b46;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: "Jost", "Segoe UI", Avenir, Helvetica, Arial, sans-serif;
+      background: var(--ivory); color: var(--charcoal); line-height: 1.5;
+    }
+    header {
+      background: var(--forest); color: var(--ivory); padding: 18px 24px;
+      display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between;
+    }
+    header h1 { font-size: 1.15rem; margin: 0; font-weight: 600; letter-spacing: .02em; }
+    header .sub { font-size: .78rem; opacity: .8; }
+    .wrap { max-width: 1400px; margin: 0 auto; padding: 20px 24px 80px; }
+    .bar {
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+      background: #fff; border: 1px solid var(--line); padding: 14px 16px; margin-bottom: 18px;
+      position: sticky; top: 0; z-index: 5;
+    }
+    .bar label { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--c); display: block; margin-bottom: 3px; }
+    select, input[type="search"], input[type="text"], textarea {
+      font-family: inherit; font-size: .9rem; padding: 7px 9px; border: 1px solid var(--line);
+      background: #fff; color: var(--charcoal); border-radius: 2px;
+    }
+    input[type="search"] { min-width: 200px; }
+    button {
+      font-family: inherit; font-size: .82rem; padding: 8px 14px; border: 1px solid var(--forest);
+      background: var(--forest); color: var(--ivory); cursor: pointer; border-radius: 2px;
+    }
+    button.ghost { background: #fff; color: var(--forest); }
+    button.ghost:hover { background: var(--ivory); }
+    button:disabled { opacity: .4; cursor: not-allowed; }
+    .stats { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 16px; font-size: .82rem; }
+    .stats b { font-size: 1.4rem; display: block; font-weight: 600; }
+    .stats .box { background: #fff; border: 1px solid var(--line); padding: 8px 16px; border-top: 2px solid var(--bronze); }
+    table { width: 100%; border-collapse: collapse; background: #fff; font-size: .84rem; }
+    th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { background: #efeadd; font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; color: #55503f; cursor: pointer; white-space: nowrap; position: sticky; top: 68px; }
+    tr:hover td { background: #fcfbf6; }
+    .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: .68rem; font-weight: 600; letter-spacing: .03em; }
+    .pri-A { background: #e4efe7; color: var(--a); border: 1px solid #b9d3c1; }
+    .pri-B { background: #f2e9d5; color: var(--b); border: 1px solid #ddc79a; }
+    .pri-C { background: #eeeeee; color: var(--c); border: 1px solid #dcdcdc; }
+    .score { font-weight: 700; font-variant-numeric: tabular-nums; }
+    .company { font-weight: 600; }
+    .muted { color: var(--c); font-size: .78rem; }
+    a { color: var(--forest-soft); }
+    .status-sel { font-size: .78rem; padding: 4px 6px; max-width: 150px; }
+    .note-cell { min-width: 220px; }
+    textarea { width: 100%; min-height: 40px; resize: vertical; }
+    .savedtag { font-size: .68rem; color: var(--ok); }
+    .empty { padding: 40px; text-align: center; color: var(--c); }
+    .drop {
+      border: 2px dashed var(--bronze); background: #fff; padding: 40px; text-align: center;
+      border-radius: 4px; margin-bottom: 20px;
+    }
+    .drop.small { padding: 16px; font-size: .82rem; }
+    details.help { background: #fff; border: 1px solid var(--line); padding: 4px 16px; margin-bottom: 18px; }
+    details.help summary { cursor: pointer; padding: 10px 0; font-weight: 600; font-size: .9rem; }
+    details.help li { margin: 5px 0; font-size: .85rem; }
+    code { background: #efeadd; padding: 1px 5px; border-radius: 2px; font-size: .82rem; }
+    .flag { color: var(--danger); font-weight: 600; }
+    @media (max-width: 720px) {
+      .hide-sm { display: none; }
+      th { position: static; }
+      .bar { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Suivi des prospects — Bureau de vente digital</h1>
+      <div class="sub">Outil local et privé. Aucune donnée n'est envoyée sur internet.</div>
+    </div>
+    <div class="sub">Données conservées dans ce navigateur (localStorage)</div>
+  </header>
+
+  <div class="wrap">
+
+    <details class="help">
+      <summary>Mode d'emploi (cliquer pour ouvrir)</summary>
+      <ul>
+        <li><b>1. Charger les prospects :</b> cliquer sur « Importer <code>leads.csv</code> » et
+          choisir le fichier <code>sales/leads.csv</code> du dépôt.</li>
+        <li><b>2. Filtrer :</b> par priorité, ville et statut, ou rechercher par nom / projet.</li>
+        <li><b>3. Travailler :</b> changer le statut, écrire une note et une prochaine action pour
+          chaque prospect. Tout est enregistré automatiquement dans ce navigateur.</li>
+        <li><b>4. Exporter :</b> « Exporter le suivi » télécharge un CSV enrichi de vos statuts,
+          notes, prochaines actions et dates. Le conserver hors du dépôt public.</li>
+        <li><b>Confidentialité :</b> cet outil fonctionne entièrement hors-ligne. Il n'a aucun
+          serveur, aucun identifiant, aucune connexion. Vos notes ne quittent jamais cet appareil
+          tant que vous ne les exportez pas.</li>
+        <li><b>Réinitialiser :</b> « Effacer les données locales » supprime uniquement vos
+          statuts et notes de ce navigateur (pas le fichier CSV d'origine).</li>
+      </ul>
+    </details>
+
+    <div class="drop" id="drop">
+      <p><b>Importer <code>leads.csv</code></b></p>
+      <p class="muted">Choisir le fichier <code>sales/leads.csv</code>, ou le glisser-déposer ici.</p>
+      <input type="file" id="file" accept=".csv" />
+    </div>
+
+    <div id="app" hidden>
+      <div class="stats" id="stats"></div>
+
+      <div class="bar">
+        <div>
+          <label for="fPri">Priorité</label>
+          <select id="fPri"><option value="">Toutes</option><option>A</option><option>B</option><option>C</option></select>
+        </div>
+        <div>
+          <label for="fCity">Ville</label>
+          <select id="fCity"><option value="">Toutes</option></select>
+        </div>
+        <div>
+          <label for="fStatus">Statut de suivi</label>
+          <select id="fStatus"><option value="">Tous</option></select>
+        </div>
+        <div style="flex:1; min-width:200px;">
+          <label for="q">Recherche</label>
+          <input type="search" id="q" placeholder="Nom, projet, ville…" />
+        </div>
+        <div style="align-self:flex-end; display:flex; gap:8px;">
+          <button id="export">Exporter le suivi</button>
+          <button class="ghost" id="reimport">Changer de fichier</button>
+          <button class="ghost" id="clear">Effacer les données locales</button>
+        </div>
+      </div>
+
+      <table id="tbl">
+        <thead>
+          <tr>
+            <th data-sort="priority">Prio.</th>
+            <th data-sort="lead_score">Score</th>
+            <th data-sort="company_name">Entreprise</th>
+            <th data-sort="city" class="hide-sm">Ville</th>
+            <th class="hide-sm">Projet</th>
+            <th data-sort="recommended_channel" class="hide-sm">Canal</th>
+            <th>Contact public</th>
+            <th data-sort="_status">Suivi</th>
+            <th class="note-cell">Note &amp; prochaine action</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty" id="empty" hidden>Aucun prospect ne correspond aux filtres.</div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    "use strict";
+    const LS_DATA = "bvd-tracker:overlay:v1";   // {company_name: {status, note, next_action, next_date}}
+    const LS_CSV  = "bvd-tracker:csv:v1";        // cached raw CSV so reload keeps data
+    const STATUSES = ["To research","Ready to contact","Contacted","Follow-up 1","Follow-up 2",
+      "Replied","Meeting scheduled","Demo completed","Proposal sent","Negotiation","Won","Lost","Not relevant"];
+
+    let headers = [], data = [], overlay = {}, sortKey = "lead_score", sortDir = -1;
+
+    // ---- CSV parse (RFC 4180) ----
+    function parseCSV(text) {
+      const rows = []; let f = "", row = [], q = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (q) {
+          if (c === '"') { if (text[i+1] === '"') { f += '"'; i++; } else q = false; }
+          else f += c;
+        } else {
+          if (c === '"') q = true;
+          else if (c === ",") { row.push(f); f = ""; }
+          else if (c === "\n") { row.push(f); f = ""; if (row.length > 1 || row[0] !== "") rows.push(row); row = []; }
+          else if (c !== "\r") f += c;
+        }
+      }
+      if (f !== "" || row.length) { row.push(f); rows.push(row); }
+      return rows;
+    }
+    function toCSV(hdr, objs) {
+      const esc = v => { v = (v == null ? "" : String(v)); return /[",\n]/.test(v) ? '"' + v.replace(/"/g,'""') + '"' : v; };
+      return [hdr.map(esc).join(",")].concat(objs.map(o => hdr.map(h => esc(o[h])).join(","))).join("\n");
+    }
+
+    function loadOverlay() { try { overlay = JSON.parse(localStorage.getItem(LS_DATA)) || {}; } catch { overlay = {}; } }
+    function saveOverlay() { try { localStorage.setItem(LS_DATA, JSON.stringify(overlay)); } catch {} }
+
+    function ingest(text) {
+      const rows = parseCSV(text);
+      if (!rows.length) { alert("Fichier vide ou illisible."); return; }
+      headers = rows[0];
+      const ci = n => headers.indexOf(n);
+      if (ci("company_name") < 0) { alert("Ce fichier ne ressemble pas à leads.csv (colonne company_name absente)."); return; }
+      data = rows.slice(1).map(r => { const o = {}; headers.forEach((h, i) => o[h] = r[i] ?? ""); return o; });
+      try { localStorage.setItem(LS_CSV, text); } catch {}
+      buildFilters(); render();
+      document.getElementById("drop").hidden = true;
+      document.getElementById("app").hidden = false;
+    }
+
+    function buildFilters() {
+      const cities = [...new Set(data.map(d => d.city).filter(Boolean))].sort();
+      const sel = document.getElementById("fCity");
+      sel.length = 1; cities.forEach(c => sel.add(new Option(c, c)));
+      const st = document.getElementById("fStatus");
+      st.length = 1; STATUSES.forEach(s => st.add(new Option(s, s)));
+    }
+
+    function key(d) { return d.company_name; }
+    function ov(d) { return overlay[key(d)] || {}; }
+
+    function filtered() {
+      const p = document.getElementById("fPri").value;
+      const c = document.getElementById("fCity").value;
+      const s = document.getElementById("fStatus").value;
+      const q = document.getElementById("q").value.trim().toLowerCase();
+      let list = data.filter(d => {
+        if (p && d.priority !== p) return false;
+        if (c && d.city !== c) return false;
+        const st = ov(d).status || "";
+        if (s && st !== s) return false;
+        if (q) {
+          const hay = (d.company_name + " " + d.city + " " + d.active_project + " " + d.project_type).toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+      list.sort((a, b) => {
+        let va, vb;
+        if (sortKey === "_status") { va = ov(a).status || ""; vb = ov(b).status || ""; }
+        else { va = a[sortKey] ?? ""; vb = b[sortKey] ?? ""; }
+        if (sortKey === "lead_score") { va = +va || 0; vb = +vb || 0; }
+        if (va < vb) return -1 * sortDir; if (va > vb) return 1 * sortDir; return 0;
+      });
+      return list;
+    }
+
+    function contactCell(d) {
+      const bits = [];
+      if (d.public_business_email) bits.push('<a href="mailto:' + d.public_business_email + '">' + d.public_business_email + '</a>');
+      if (d.public_business_phone) bits.push('<span class="muted">' + d.public_business_phone + '</span>');
+      if (d.public_contact_name) bits.push('<span class="muted">' + d.public_contact_name + (d.public_contact_role ? " — " + d.public_contact_role : "") + '</span>');
+      const links = [];
+      if (d.company_website) links.push('<a href="' + d.company_website + '" target="_blank" rel="noopener">site</a>');
+      if (d.linkedin_company_url) links.push('<a href="' + d.linkedin_company_url + '" target="_blank" rel="noopener">LinkedIn</a>');
+      if (d.instagram_url) links.push('<a href="' + d.instagram_url + '" target="_blank" rel="noopener">IG</a>');
+      if (links.length) bits.push('<span class="muted">' + links.join(" · ") + '</span>');
+      if (!bits.length) return '<span class="flag">Non vérifié</span>';
+      return bits.join("<br>");
+    }
+
+    function render() {
+      const list = filtered();
+      const tb = document.getElementById("rows");
+      tb.innerHTML = "";
+      document.getElementById("empty").hidden = list.length > 0;
+      list.forEach(d => {
+        const o = ov(d);
+        const tr = document.createElement("tr");
+        const statusOpts = ['<option value="">—</option>'].concat(
+          STATUSES.map(s => '<option' + (o.status === s ? " selected" : "") + '>' + s + '</option>')).join("");
+        tr.innerHTML =
+          '<td><span class="pill pri-' + d.priority + '">' + d.priority + '</span></td>' +
+          '<td class="score">' + d.lead_score + '</td>' +
+          '<td><span class="company">' + d.company_name + '</span><br><span class="muted">' + (d.active_project || "") + '</span></td>' +
+          '<td class="hide-sm">' + d.city + '</td>' +
+          '<td class="hide-sm muted">' + (d.project_type || "") + '</td>' +
+          '<td class="hide-sm muted">' + (d.recommended_channel || "") + '</td>' +
+          '<td>' + contactCell(d) + '</td>' +
+          '<td><select class="status-sel">' + statusOpts + '</select></td>' +
+          '<td class="note-cell">' +
+            '<textarea placeholder="Note…">' + (o.note || "") + '</textarea>' +
+            '<input type="text" placeholder="Prochaine action" value="' + (o.next_action || "").replace(/"/g,"&quot;") + '" style="width:65%">' +
+            '<input type="date" value="' + (o.next_date || "") + '" style="width:34%">' +
+            '<span class="savedtag" hidden> enregistré</span>' +
+          '</td>';
+        const sel = tr.querySelector(".status-sel");
+        const ta = tr.querySelector("textarea");
+        const na = tr.querySelector('input[type="text"]');
+        const dt = tr.querySelector('input[type="date"]');
+        const tag = tr.querySelector(".savedtag");
+        function persist() {
+          const rec = overlay[key(d)] || {};
+          rec.status = sel.value; rec.note = ta.value; rec.next_action = na.value; rec.next_date = dt.value;
+          overlay[key(d)] = rec; saveOverlay();
+          tag.hidden = false; setTimeout(() => tag.hidden = true, 1200);
+        }
+        sel.addEventListener("change", () => { persist(); updateStats(); });
+        [ta, na, dt].forEach(el => el.addEventListener("change", persist));
+        tb.appendChild(tr);
+      });
+      updateStats(list);
+    }
+
+    function updateStats(list) {
+      list = list || filtered();
+      const total = data.length;
+      const shown = list.length;
+      const withStatus = data.filter(d => (ov(d).status || "") && ov(d).status !== "To research").length;
+      const a = data.filter(d => d.priority === "A").length;
+      document.getElementById("stats").innerHTML =
+        '<div class="box"><b>' + total + '</b>prospects au total</div>' +
+        '<div class="box"><b>' + a + '</b>priorité A</div>' +
+        '<div class="box"><b>' + withStatus + '</b>en cours de traitement</div>' +
+        '<div class="box"><b>' + shown + '</b>affichés (filtres)</div>';
+    }
+
+    function exportCSV() {
+      const extra = ["_suivi_statut","_suivi_note","_suivi_prochaine_action","_suivi_date_action"];
+      const hdr = headers.concat(extra);
+      const objs = data.map(d => {
+        const o = Object.assign({}, d), r = ov(d);
+        o._suivi_statut = r.status || ""; o._suivi_note = r.note || "";
+        o._suivi_prochaine_action = r.next_action || ""; o._suivi_date_action = r.next_date || "";
+        return o;
+      });
+      const blob = new Blob(["﻿" + toCSV(hdr, objs)], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const d = new Date();
+      const stamp = d.getFullYear() + String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0");
+      a.href = url; a.download = "suivi-prospects-" + stamp + ".csv";
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    }
+
+    // ---- wiring ----
+    document.getElementById("file").addEventListener("change", e => {
+      const f = e.target.files[0]; if (!f) return;
+      const r = new FileReader(); r.onload = () => ingest(r.result); r.readAsText(f, "utf-8");
+    });
+    const drop = document.getElementById("drop");
+    ["dragover","dragenter"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.style.background = "#f3efe2"; }));
+    ["dragleave","drop"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.style.background = "#fff"; }));
+    drop.addEventListener("drop", e => {
+      const f = e.dataTransfer.files[0]; if (!f) return;
+      const r = new FileReader(); r.onload = () => ingest(r.result); r.readAsText(f, "utf-8");
+    });
+    ["fPri","fCity","fStatus"].forEach(id => document.getElementById(id).addEventListener("change", render));
+    document.getElementById("q").addEventListener("input", render);
+    document.getElementById("export").addEventListener("click", exportCSV);
+    document.getElementById("reimport").addEventListener("click", () => {
+      document.getElementById("app").hidden = true; document.getElementById("drop").hidden = false;
+      document.getElementById("file").value = "";
+    });
+    document.getElementById("clear").addEventListener("click", () => {
+      if (confirm("Effacer tous vos statuts et notes de ce navigateur ? Le fichier leads.csv n'est pas touché.")) {
+        overlay = {}; saveOverlay(); render();
+      }
+    });
+    document.querySelectorAll("th[data-sort]").forEach(th => th.addEventListener("click", () => {
+      const k = th.getAttribute("data-sort");
+      if (sortKey === k) sortDir *= -1; else { sortKey = k; sortDir = (k === "lead_score") ? -1 : 1; }
+      render();
+    }));
+
+    // ---- boot: restore cached CSV so reload keeps working ----
+    loadOverlay();
+    const cached = localStorage.getItem(LS_CSV);
+    if (cached) { try { ingest(cached); } catch {} }
+  })();
+  </script>
+</body>
+</html>

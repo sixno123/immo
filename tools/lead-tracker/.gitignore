@@ -1,0 +1,3 @@
+# Exports de suivi — contiennent des notes de prospection, ne pas committer
+suivi-prospects-*.csv
+*.local.csv
