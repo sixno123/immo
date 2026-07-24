@@ -42,7 +42,7 @@ const ApartmentPage = () => {
   if (!apartment) {
     return (
       <div className="container-luxe flex min-h-[60vh] flex-col items-center justify-center gap-5 pt-24 text-center">
-        <p className="font-display text-3xl text-charcoal-700">Lot introuvable</p>
+        <h1 className="font-display text-3xl text-charcoal-700">Lot introuvable</h1>
         <p className="max-w-md text-sm text-charcoal-500">
           Ce lot n'existe pas ou n'est plus proposé. Consultez la liste des disponibilités pour
           découvrir les appartements du programme.

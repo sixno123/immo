@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
@@ -29,6 +29,9 @@ export const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
   const reducedMotion = useReducedMotion();
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const wasOpenRef = useRef(false);
 
   // Fond transparent uniquement sur le hero de la page d'accueil.
   const overHero = pathname === '/' && !scrolled;
@@ -50,6 +53,28 @@ export const Navbar = () => {
     return () => {
       document.body.style.overflow = '';
     };
+  }, [open]);
+
+  // Fermeture au clavier (Échap) + gestion du focus pour l'accessibilité.
+  useEffect(() => {
+    if (open) {
+      wasOpenRef.current = true;
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setOpen(false);
+      };
+      window.addEventListener('keydown', onKey);
+      // Déplace le focus dans le panneau ouvert.
+      const focusTimer = window.setTimeout(() => closeRef.current?.focus(), 60);
+      return () => {
+        window.removeEventListener('keydown', onKey);
+        window.clearTimeout(focusTimer);
+      };
+    }
+    // À la fermeture, rend le focus au bouton d'ouverture.
+    if (wasOpenRef.current) {
+      wasOpenRef.current = false;
+      toggleRef.current?.focus();
+    }
   }, [open]);
 
   const mobileMenu = (
@@ -78,6 +103,7 @@ export const Navbar = () => {
             <div className="flex items-center justify-between border-b border-charcoal-700/10 px-6 py-5">
               <Logo dark />
               <button
+                ref={closeRef}
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Fermer le menu"
@@ -165,10 +191,12 @@ export const Navbar = () => {
               Visite
             </Link>
             <button
+              ref={toggleRef}
               type="button"
               onClick={() => setOpen(true)}
               aria-label="Ouvrir le menu"
               aria-expanded={open}
+              aria-haspopup="dialog"
               className={`flex h-11 w-11 items-center justify-center ${
                 dark ? 'text-charcoal-700' : 'text-ivory-50'
               }`}

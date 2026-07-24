@@ -14,10 +14,25 @@ const KEYS = {
   views: 'azure-bouskoura:apartment-views',
 } as const;
 
+/**
+ * Vérifie que la valeur lue a la même « forme » que la valeur de repli
+ * (tableau vs objet vs primitif, et jamais null). Indispensable pour éviter
+ * qu'un JSON valide mais inattendu (ex. « null », un tableau à la place d'un
+ * objet, une chaîne) ne fasse planter l'application.
+ */
+const matchesShape = (value: unknown, fallback: unknown): boolean => {
+  if (value === null || value === undefined) return false;
+  if (Array.isArray(fallback)) return Array.isArray(value);
+  if (typeof fallback === 'object') return typeof value === 'object' && !Array.isArray(value);
+  return typeof value === typeof fallback;
+};
+
 const safeRead = <T>(key: string, fallback: T): T => {
   try {
     const raw = window.localStorage.getItem(key);
-    return raw ? (JSON.parse(raw) as T) : fallback;
+    if (!raw) return fallback;
+    const parsed = JSON.parse(raw) as unknown;
+    return matchesShape(parsed, fallback) ? (parsed as T) : fallback;
   } catch {
     return fallback;
   }

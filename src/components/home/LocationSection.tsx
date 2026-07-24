@@ -9,6 +9,7 @@ import {
   UtensilsCrossed,
   type LucideIcon,
 } from 'lucide-react';
+import { useReducedMotion } from 'framer-motion';
 import { pointsOfInterest } from '../../data/pois';
 import { projectConfig } from '../../config/project';
 import { Reveal } from '../ui/Reveal';
@@ -25,7 +26,9 @@ const icons: Record<string, LucideIcon> = {
 };
 
 /** Carte stylisée (placeholder) : à remplacer par une carte interactive dans la version finale. */
-const MapPlaceholder = () => (
+const MapPlaceholder = () => {
+  const reducedMotion = useReducedMotion();
+  return (
   <div
     className="relative overflow-hidden border border-forest-700/20 bg-forest-50"
     role="img"
@@ -55,7 +58,9 @@ const MapPlaceholder = () => (
       {/* Résidence */}
       <g transform="translate(300, 240)">
         <circle r="34" fill="#1F3D2B" opacity="0.12">
-          <animate attributeName="r" values="26;40;26" dur="3.5s" repeatCount="indefinite" />
+          {!reducedMotion && (
+            <animate attributeName="r" values="26;40;26" dur="3.5s" repeatCount="indefinite" />
+          )}
         </circle>
         <circle r="13" fill="#1F3D2B" />
         <path d="M-5 4v-6l5-4 5 4v6h-3v-4h-4v4z" fill="#C2A566" />
@@ -68,7 +73,8 @@ const MapPlaceholder = () => (
       Carte illustrative non contractuelle
     </p>
   </div>
-);
+  );
+};
 
 export const LocationSection = () => (
   <section id="localisation" className="scroll-mt-24 bg-ivory-100 py-20 md:py-28">
