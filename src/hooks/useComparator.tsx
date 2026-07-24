@@ -7,8 +7,15 @@ import {
   type ReactNode,
 } from 'react';
 import { getComparatorIds, saveComparatorIds } from '../utils/storage';
+import { apartments } from '../data/apartments';
 
 export const COMPARATOR_LIMIT = 3;
+
+const validApartmentIds = new Set(apartments.map((a) => a.id));
+
+/** Ne conserve que des identifiants de lots réels (protège des données locales corrompues). */
+const sanitizeIds = (ids: string[]): string[] =>
+  ids.filter((id) => typeof id === 'string' && validApartmentIds.has(id)).slice(0, COMPARATOR_LIMIT);
 
 interface ComparatorContextValue {
   ids: string[];
@@ -22,7 +29,7 @@ interface ComparatorContextValue {
 const ComparatorContext = createContext<ComparatorContextValue | null>(null);
 
 export const ComparatorProvider = ({ children }: { children: ReactNode }) => {
-  const [ids, setIds] = useState<string[]>(() => getComparatorIds().slice(0, COMPARATOR_LIMIT));
+  const [ids, setIds] = useState<string[]>(() => sanitizeIds(getComparatorIds()));
 
   const update = useCallback((next: string[]) => {
     setIds(next);

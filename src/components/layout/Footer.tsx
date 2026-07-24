@@ -87,7 +87,7 @@ export const Footer = () => (
             </span>
           </li>
         </ul>
-        <div className="mt-6 flex gap-4">
+        <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2">
           {projectConfig.socialLinks.map((s) => (
             <a
               key={s.label}

@@ -40,7 +40,12 @@ export const FinancingSimulator = ({ initialPrice = 1_850_000, embedded = false 
             max={4_000_000}
             step={50_000}
             value={price}
-            onChange={(e) => setPrice(Number(e.target.value))}
+            onChange={(e) => {
+              const next = Number(e.target.value);
+              setPrice(next);
+              // L'apport ne peut jamais dépasser le prix du bien.
+              setDownPayment((d) => Math.min(d, next));
+            }}
             className="mt-3 w-full accent-forest-700"
           />
         </div>

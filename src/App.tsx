@@ -52,7 +52,7 @@ const Shell = () => {
 };
 
 const App = () => (
-  <BrowserRouter>
+  <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
     <ComparatorProvider>
       <Shell />
     </ComparatorProvider>
