@@ -79,6 +79,18 @@
   }
 }
 
+@layer utilities {
+  /* Hauteur plein écran fiable sur mobile : 100dvh avec repli 100vh (iOS Safari). */
+  .full-dvh {
+    height: 100vh;
+  }
+  @supports (height: 100dvh) {
+    .full-dvh {
+      height: 100dvh;
+    }
+  }
+}
+
 /* Styles d'impression pour la brochure */
 @media print {
   .no-print {
