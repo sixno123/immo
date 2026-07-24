@@ -8,7 +8,7 @@ export const BrochureCTA = () => (
       <Reveal className="flex flex-col items-center gap-6 border border-bronze-300/40 bg-gradient-to-br from-ivory-50 to-bronze-100/40 px-6 py-12 text-center md:py-16">
         <p className="eyebrow">Documentation</p>
         <h2 className="heading-display max-w-xl text-3xl sm:text-4xl">
-          Emportez la résidence <span className="italic text-forest-700">avec vous</span>
+          Emportez la résidence <span className="font-light italic text-forest-700">avec vous</span>
         </h2>
         <p className="max-w-lg text-[0.95rem] leading-relaxed text-charcoal-500">
           Retrouvez l'essentiel du programme — plans, prestations, disponibilités et contacts —

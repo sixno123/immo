@@ -41,7 +41,7 @@ export const Gallery = () => {
           eyebrow="Galerie"
           title={
             <>
-              L'esprit <span className="italic text-forest-700">Azure Bouskoura</span>
+              L'esprit <span className="font-light italic text-forest-700">Azure Bouskoura</span>
             </>
           }
           description="Visuels d'ambiance non contractuels, illustrant l'atmosphère recherchée pour la résidence."
@@ -60,6 +60,7 @@ export const Gallery = () => {
                   src={img.src}
                   alt={img.alt}
                   aspect={i % 5 === 0 ? 'aspect-[16/9]' : 'aspect-square'}
+                  tone
                   imgClassName="transition-transform duration-700 group-hover:scale-[1.04]"
                 />
                 <span className="absolute bottom-3 left-3 bg-charcoal-900/60 px-3 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.14em] text-ivory-50 backdrop-blur-sm">

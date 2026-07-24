@@ -145,7 +145,7 @@ export const FinancingSimulator = ({ initialPrice = 1_850_000, embedded = false 
           eyebrow="Financement"
           title={
             <>
-              Estimez votre <span className="italic text-forest-700">mensualité</span>
+              Estimez votre <span className="font-light italic text-forest-700">mensualité</span>
             </>
           }
           description={

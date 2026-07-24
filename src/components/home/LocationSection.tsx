@@ -77,7 +77,7 @@ export const LocationSection = () => (
         eyebrow="Localisation"
         title={
           <>
-            Bouskoura, <span className="italic text-forest-700">l'adresse qui monte</span>
+            Bouskoura, <span className="font-light italic text-forest-700">l'adresse qui monte</span>
           </>
         }
         description={

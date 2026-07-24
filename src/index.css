@@ -23,6 +23,17 @@
     @apply bg-forest-700 text-ivory-100;
   }
 
+  /* Ligatures et chiffres élégants pour le titrage sérif */
+  .heading-display,
+  .font-display {
+    font-feature-settings: 'liga' 1, 'dlig' 1, 'kern' 1;
+  }
+
+  /* Chiffres alignés (tabular) pour les prix et tableaux */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
   /* États de focus visibles et élégants sur tout le site */
   :focus-visible {
     outline: 2px solid theme('colors.bronze.500');
@@ -43,31 +54,42 @@
   }
 
   .eyebrow {
+    @apply inline-flex items-center gap-2.5 text-[0.7rem] font-medium uppercase tracking-luxe text-bronze-600;
+  }
+
+  /* Filet décoratif court précédant les intitulés de section */
+  .eyebrow::before {
+    content: '';
+    @apply h-px w-7 bg-bronze-400/70;
+  }
+
+  .eyebrow-plain {
     @apply text-[0.7rem] font-medium uppercase tracking-luxe text-bronze-600;
   }
 
   .heading-display {
-    @apply font-display font-medium leading-[1.08] text-charcoal-800;
+    @apply font-display font-medium leading-[1.05] tracking-[-0.01em] text-charcoal-800;
+    text-wrap: balance;
   }
 
   .btn {
-    @apply inline-flex min-h-[48px] items-center justify-center gap-2 px-7 py-3 text-[0.8rem] font-medium uppercase tracking-[0.14em] transition-colors duration-300;
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 px-7 py-3 text-[0.8rem] font-medium uppercase tracking-[0.14em] transition-all duration-300;
   }
 
   .btn-primary {
-    @apply btn bg-forest-700 text-ivory-50 hover:bg-forest-800;
+    @apply btn bg-forest-700 text-ivory-50 hover:bg-forest-800 hover:shadow-[0_10px_30px_-8px_rgba(31,61,43,0.55)];
   }
 
   .btn-bronze {
-    @apply btn bg-bronze-500 text-white hover:bg-bronze-600;
+    @apply btn bg-bronze-500 text-white hover:bg-bronze-600 hover:shadow-[0_10px_30px_-8px_rgba(154,123,63,0.55)];
   }
 
   .btn-outline {
-    @apply btn border border-charcoal-700/25 text-charcoal-700 hover:border-forest-700 hover:text-forest-700;
+    @apply btn border border-charcoal-700/25 text-charcoal-700 hover:border-forest-700 hover:bg-forest-700 hover:text-ivory-50;
   }
 
   .btn-outline-light {
-    @apply btn border border-ivory-50/40 text-ivory-50 hover:border-ivory-50 hover:bg-ivory-50/10;
+    @apply btn border border-ivory-50/40 text-ivory-50 hover:border-ivory-50 hover:bg-ivory-50 hover:text-forest-800;
   }
 
   .field-label {
@@ -75,7 +97,47 @@
   }
 
   .field-input {
-    @apply w-full border border-charcoal-700/15 bg-white px-4 py-3 text-[0.95rem] text-charcoal-700 placeholder:text-charcoal-400/60 focus:border-forest-600 focus:outline-none focus:ring-1 focus:ring-forest-600;
+    @apply w-full border border-charcoal-700/15 bg-white px-4 py-3 text-[0.95rem] text-charcoal-700 transition-colors placeholder:text-charcoal-400/60 focus:border-forest-600 focus:outline-none focus:ring-1 focus:ring-forest-600;
+  }
+
+  /* Filet fin réutilisable */
+  .hairline {
+    @apply h-px w-full bg-charcoal-700/10;
+  }
+}
+
+@layer utilities {
+  /* Grain photographique très discret pour une texture éditoriale (statique, sans coût d'animation) */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Traitement de tonalité chaude et cohérente sur les visuels d'architecture */
+  .img-tone::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(31, 61, 43, 0.12) 0%, rgba(26, 26, 29, 0) 32%, rgba(26, 26, 29, 0.14) 100%),
+      radial-gradient(120% 90% at 50% 0%, rgba(194, 165, 102, 0.08) 0%, rgba(194, 165, 102, 0) 55%);
+    mix-blend-mode: multiply;
+  }
+
+  /* Vignette douce, pour asseoir les visuels plein cadre */
+  .img-vignette::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    box-shadow: inset 0 0 120px 24px rgba(26, 26, 29, 0.28);
   }
 }
 

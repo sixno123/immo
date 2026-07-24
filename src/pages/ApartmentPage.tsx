@@ -89,27 +89,38 @@ const ApartmentPage = () => {
 
       <div className="container-luxe grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
         {/* Visuels */}
-        <div className="space-y-5">
+        <div className="space-y-5 lg:sticky lg:top-24 lg:self-start">
           <Reveal>
-            <SmartImage
-              src={apartment.mainImage}
-              alt={`Visuel d'ambiance — ${apartment.type}, lot ${apartment.reference}`}
-              aspect="aspect-[4/3]"
-              eager
-            />
+            <div className="relative">
+              <SmartImage
+                src={apartment.mainImage}
+                alt={`Visuel d'ambiance — ${apartment.type}, lot ${apartment.reference}`}
+                aspect="aspect-[4/3]"
+                tone
+                eager
+                className="shadow-card"
+              />
+              <span className="absolute bottom-0 left-0 bg-charcoal-900/75 px-4 py-2 font-display text-lg font-semibold tracking-wide text-ivory-50 backdrop-blur-sm">
+                Lot {apartment.reference}
+              </span>
+              <span className="absolute right-3 top-3">
+                <StatusBadge status={apartment.status} />
+              </span>
+            </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <figure className="border border-charcoal-700/10 bg-white p-4">
+            <figure className="border border-charcoal-700/10 bg-white p-5">
+              <figcaption className="mb-3 flex items-center justify-between text-[0.62rem] uppercase tracking-[0.14em] text-charcoal-400">
+                <span className="text-bronze-600">Plan de l'appartement</span>
+                <span>Non contractuel</span>
+              </figcaption>
               <SmartImage
                 src={apartment.floorPlanImage}
                 alt={`Plan schématique du lot ${apartment.reference} (${apartment.type})`}
                 aspect="aspect-[4/3]"
-                className="!bg-white"
-                imgClassName="!object-contain"
+                className="!bg-ivory-50"
+                imgClassName="!object-contain p-2"
               />
-              <figcaption className="mt-3 text-center text-[0.65rem] uppercase tracking-[0.12em] text-charcoal-400">
-                Plan schématique non contractuel
-              </figcaption>
             </figure>
           </Reveal>
         </div>
@@ -125,20 +136,27 @@ const ApartmentPage = () => {
             </div>
             <h1 className="heading-display mt-4 text-3xl sm:text-4xl">
               {apartment.type}
-              <span className="mt-1 block font-sans text-[0.85rem] font-normal uppercase tracking-[0.14em] text-charcoal-400">
+              <span className="mt-1.5 block font-sans text-[0.82rem] font-normal uppercase tracking-[0.14em] text-charcoal-400">
                 Bâtiment {apartment.building} · {floorLabel(apartment.floor)}
               </span>
             </h1>
-            <p className="mt-5 font-display text-3xl font-semibold text-forest-700 md:text-4xl">
-              {formatPrice(apartment.price)}
-            </p>
-            <p className="mt-1.5 text-sm text-charcoal-500">
-              soit une mensualité estimée de{' '}
-              <strong className="text-forest-700">{formatPrice(monthly)}</strong> / mois
-              <span className="block text-xs text-charcoal-400">
-                (20 % d'apport, 25 ans, 4,5 % — {FINANCING_DISCLAIMER.toLowerCase()})
-              </span>
-            </p>
+
+            {/* Bloc prix — présentation affirmée */}
+            <div className="mt-6 border-l-2 border-bronze-400 bg-ivory-50 py-4 pl-5">
+              <p className="text-[0.62rem] uppercase tracking-[0.16em] text-charcoal-400">
+                Prix de vente
+              </p>
+              <p className="mt-1 font-display text-4xl font-semibold text-forest-700 tabular-nums md:text-[2.75rem]">
+                {formatPrice(apartment.price)}
+              </p>
+              <p className="mt-2 text-sm text-charcoal-500">
+                Mensualité estimée{' '}
+                <strong className="text-forest-700 tabular-nums">{formatPrice(monthly)}</strong> / mois
+                <span className="mt-0.5 block text-xs text-charcoal-400">
+                  20 % d'apport · 25 ans · 4,5 % — {FINANCING_DISCLAIMER.toLowerCase()}
+                </span>
+              </p>
+            </div>
 
             <p className="mt-6 text-[0.95rem] leading-relaxed text-charcoal-500">
               {apartment.longDescription}
@@ -177,37 +195,41 @@ const ApartmentPage = () => {
 
           {/* Actions */}
           <Reveal delay={0.16}>
-            <div className="mt-9 grid gap-3 sm:grid-cols-2">
-              <Link to={`/?lot=${apartment.reference}#contact`} className="btn-primary">
-                <Mail className="h-4 w-4" aria-hidden="true" />
-                Demander des informations
-              </Link>
-              <Link to={`/?lot=${apartment.reference}#contact`} className="btn-bronze">
+            <div className="mt-9 border-t border-charcoal-700/10 pt-8">
+              {/* Action principale mise en avant */}
+              <Link to={`/?lot=${apartment.reference}#contact`} className="btn-bronze w-full">
                 <CalendarCheck className="h-4 w-4" aria-hidden="true" />
-                Réserver une visite
+                Réserver une visite pour ce lot
               </Link>
-              <a
-                href={buildWhatsAppLink(apartment.reference)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline"
-              >
-                <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                Contacter sur WhatsApp
-              </a>
-              <button
-                type="button"
-                onClick={() => toggle(apartment.id)}
-                disabled={!inComparator && isFull}
-                className={`btn ${
-                  inComparator
-                    ? 'bg-forest-50 text-forest-700 ring-1 ring-forest-600'
-                    : 'border border-charcoal-700/25 text-charcoal-700 hover:border-forest-700 hover:text-forest-700 disabled:cursor-not-allowed disabled:opacity-40'
-                }`}
-              >
-                <Scale className="h-4 w-4" aria-hidden="true" />
-                {inComparator ? 'Retirer du comparateur' : 'Ajouter au comparateur'}
-              </button>
+              {/* Actions secondaires */}
+              <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                <Link to={`/?lot=${apartment.reference}#contact`} className="btn-outline">
+                  <Mail className="h-4 w-4" aria-hidden="true" />
+                  Informations
+                </Link>
+                <a
+                  href={buildWhatsAppLink(apartment.reference)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline"
+                >
+                  <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                  WhatsApp
+                </a>
+                <button
+                  type="button"
+                  onClick={() => toggle(apartment.id)}
+                  disabled={!inComparator && isFull}
+                  className={`btn ${
+                    inComparator
+                      ? 'bg-forest-50 text-forest-700 ring-1 ring-forest-600'
+                      : 'border border-charcoal-700/25 text-charcoal-700 hover:border-forest-700 hover:text-forest-700 disabled:cursor-not-allowed disabled:opacity-40'
+                  }`}
+                >
+                  <Scale className="h-4 w-4" aria-hidden="true" />
+                  {inComparator ? 'Retirer' : 'Comparer'}
+                </button>
+              </div>
             </div>
             {!inComparator && isFull && (
               <p className="mt-2 text-xs text-charcoal-400">
