@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="white"/>
+  
+  <rect x="60" y="60" width="280" height="190" fill="#FCFBF7" stroke="#1F3D2B" stroke-width="3"/>
+  <text x="200" y="149" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#1F3D2B">Séjour</text>
+  <text x="200" y="171" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#9A7B3F">32 m²</text>
+  <rect x="340" y="60" width="150" height="110" fill="#FCFBF7" stroke="#1F3D2B" stroke-width="3"/>
+  <text x="415" y="109" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#1F3D2B">Cuisine</text>
+  <text x="415" y="131" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#9A7B3F">12 m²</text>
+  <rect x="340" y="170" width="150" height="80" fill="#FCFBF7" stroke="#1F3D2B" stroke-width="3"/>
+  <text x="415" y="204" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#1F3D2B">Entrée</text>
+  <text x="415" y="226" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#9A7B3F">6 m²</text>
+  <rect x="60" y="250" width="170" height="160" fill="#FCFBF7" stroke="#1F3D2B" stroke-width="3"/>
+  <text x="145" y="324" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#1F3D2B">Suite parentale</text>
+  <text x="145" y="346" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#9A7B3F">17 m²</text>
+  <rect x="230" y="250" width="140" height="160" fill="#FCFBF7" stroke="#1F3D2B" stroke-width="3"/>
+  <text x="300" y="324" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#1F3D2B">Chambre 2</text>
+  <text x="300" y="346" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#9A7B3F">13 m²</text>
+  <rect x="370" y="250" width="120" height="160" fill="#FCFBF7" stroke="#1F3D2B" stroke-width="3"/>
+  <text x="430" y="324" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#1F3D2B">Chambre 3</text>
+  <text x="430" y="346" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#9A7B3F">12 m²</text>
+  <rect x="60" y="410" width="430" height="60" fill="#EEF3EF" stroke="#527C60" stroke-width="2" stroke-dasharray="8 5"/>
+  <text x="275" y="445" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-style="italic" fill="#365B44">Terrasse couverte</text>
+  <rect x="500" y="60" width="240" height="410" fill="#EEF3EF" stroke="#527C60" stroke-width="2" stroke-dasharray="8 5"/>
+  <text x="620" y="270" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-style="italic" fill="#365B44">Jardin privatif engazonné</text>
+  <text x="40" y="572" font-family="Georgia, serif" font-size="20" fill="#1A1A1D">Rez-de-jardin — env. 96 à 118 m² + jardin privatif</text>
+  <text x="760" y="572" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#6B6B70">Plan schématique non contractuel — Résidence Azure Bouskoura</text>
+  <g transform="translate(730, 70)">
+    <circle r="24" fill="none" stroke="#6B6B70" stroke-width="1.5"/>
+    <path d="M0 -18 L6 8 L0 2 L-6 8 Z" fill="#1F3D2B"/>
+    <text y="-32" text-anchor="middle" font-family="Arial" font-size="13" fill="#6B6B70">N</text>
+  </g>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="white"/>
+  
+  <rect x="60" y="60" width="320" height="190" fill="#FCFBF7" stroke="#1F3D2B" stroke-width="3"/>
+  <text x="220" y="149" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#1F3D2B">Double réception</text>
+  <text x="220" y="171" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#9A7B3F">42 m²</text>
+  <rect x="380" y="60" width="150" height="100" fill="#FCFBF7" stroke="#1F3D2B" stroke-width="3"/>
+  <text x="455" y="104" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#1F3D2B">Cuisine</text>
+  <text x="455" y="126" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#9A7B3F">14 m²</text>
+  <rect x="380" y="160" width="150" height="90" fill="#FCFBF7" stroke="#1F3D2B" stroke-width="3"/>
+  <text x="455" y="199" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#1F3D2B">Office</text>
+  <text x="455" y="221" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#9A7B3F">7 m²</text>
+  <rect x="60" y="250" width="160" height="210" fill="#FCFBF7" stroke="#1F3D2B" stroke-width="3"/>
+  <text x="140" y="349" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#1F3D2B">Suite 1</text>
+  <text x="140" y="371" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#9A7B3F">18 m²</text>
+  <rect x="220" y="250" width="140" height="210" fill="#FCFBF7" stroke="#1F3D2B" stroke-width="3"/>
+  <text x="290" y="349" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#1F3D2B">Suite 2</text>
+  <text x="290" y="371" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#9A7B3F">16 m²</text>
+  <rect x="360" y="250" width="120" height="120" fill="#FCFBF7" stroke="#1F3D2B" stroke-width="3"/>
+  <text x="420" y="304" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#1F3D2B">Chambre 3</text>
+  <text x="420" y="326" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#9A7B3F">12 m²</text>
+  <rect x="480" y="250" width="110" height="120" fill="#FCFBF7" stroke="#1F3D2B" stroke-width="3"/>
+  <text x="535" y="304" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#1F3D2B">Chambre 4</text>
+  <text x="535" y="326" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#9A7B3F">11 m²</text>
+  <rect x="360" y="370" width="230" height="90" fill="#FCFBF7" stroke="#1F3D2B" stroke-width="3"/>
+  <text x="475" y="409" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#1F3D2B">SDB familiale</text>
+  <text x="475" y="431" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#9A7B3F">7 m²</text>
+  <rect x="590" y="60" width="150" height="400" fill="#EEF3EF" stroke="#527C60" stroke-width="2" stroke-dasharray="8 5"/>
+  <text x="665" y="265" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-style="italic" fill="#365B44">Terrasse</text>
+  <text x="40" y="572" font-family="Georgia, serif" font-size="20" fill="#1A1A1D">Appartement 4 chambres — env. 120 à 135 m²</text>
+  <text x="760" y="572" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#6B6B70">Plan schématique non contractuel — Résidence Azure Bouskoura</text>
+  <g transform="translate(730, 70)">
+    <circle r="24" fill="none" stroke="#6B6B70" stroke-width="1.5"/>
+    <path d="M0 -18 L6 8 L0 2 L-6 8 Z" fill="#1F3D2B"/>
+    <text y="-32" text-anchor="middle" font-family="Arial" font-size="13" fill="#6B6B70">N</text>
+  </g>
+</svg>

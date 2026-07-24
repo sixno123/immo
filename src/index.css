@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-ivory-100 font-sans text-charcoal-700 antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-forest-700 text-ivory-100;
+  }
+
+  /* États de focus visibles et élégants sur tout le site */
+  :focus-visible {
+    outline: 2px solid theme('colors.bronze.500');
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  input,
+  select,
+  textarea {
+    @apply bg-white;
+  }
+}
+
+@layer components {
+  .container-luxe {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8 lg:px-12;
+  }
+
+  .eyebrow {
+    @apply text-[0.7rem] font-medium uppercase tracking-luxe text-bronze-600;
+  }
+
+  .heading-display {
+    @apply font-display font-medium leading-[1.08] text-charcoal-800;
+  }
+
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 px-7 py-3 text-[0.8rem] font-medium uppercase tracking-[0.14em] transition-colors duration-300;
+  }
+
+  .btn-primary {
+    @apply btn bg-forest-700 text-ivory-50 hover:bg-forest-800;
+  }
+
+  .btn-bronze {
+    @apply btn bg-bronze-500 text-white hover:bg-bronze-600;
+  }
+
+  .btn-outline {
+    @apply btn border border-charcoal-700/25 text-charcoal-700 hover:border-forest-700 hover:text-forest-700;
+  }
+
+  .btn-outline-light {
+    @apply btn border border-ivory-50/40 text-ivory-50 hover:border-ivory-50 hover:bg-ivory-50/10;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-[0.72rem] font-medium uppercase tracking-[0.12em] text-charcoal-500;
+  }
+
+  .field-input {
+    @apply w-full border border-charcoal-700/15 bg-white px-4 py-3 text-[0.95rem] text-charcoal-700 placeholder:text-charcoal-400/60 focus:border-forest-600 focus:outline-none focus:ring-1 focus:ring-forest-600;
+  }
+}
+
+/* Styles d'impression pour la brochure */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+  .print-page {
+    break-inside: avoid;
+  }
+}
